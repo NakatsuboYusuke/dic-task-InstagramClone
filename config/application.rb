@@ -18,6 +18,11 @@ module Lookbookapp
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       %Q(#{html_tag}).html_safe
     end
+    config.generators do |g|
+      g.assets false
+      g.helper false
+    end
+    # 404 & 500 are defined on /errors/*.html.slim
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
   end
 end
