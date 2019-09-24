@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title Instadrawapp
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    #container
+      header.header
+        .inner
+          .picture
+            = link_to "カメラアイコン", new_picture_path
+          .logo
+            /h1 = link_to root_path do
+                = image_tag "logo.png"
+                span LookboolApp
+          #wrapper
+            nav.nav.login
+              /ul
+                - if logged_in?
+                  li.subnav アカウント
+                  li = link_to "プロフィールを編集", user_path(current_user.id)
+                  li = link_to "ログアウト", logout_path(current_user.id), method: :delete
+                - else
+                  li.subnav オプション
+                  li = link_to "登録", new_user_path
+                  li = link_to "ログイン", login_path
+            button#nav-btn.hamburger
+              span.bdr
+              span.bdr
+              span.bdr
+            #contents
+      section.sec
+        .inner
+          = yield
+      - if flash[:notice]
+        .flash
+          = flash[:notice]
+      footer.footer
+        .inner
+          p
+            small ©️ 2019 InstadrawApp

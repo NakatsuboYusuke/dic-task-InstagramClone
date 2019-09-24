@@ -1,8 +1,14 @@
-h1 Editing picture
-
-== render 'form'
-
-=> link_to 'Show', @picture
-'|
-=< link_to 'Back', pictures_path
-
+.content.create
+  = form_with model: @picture, local: true do |form|
+    /- if @picture.errors.any?
+      .error_content
+        ul
+          - @picture.errors.full_messages.each do |message|
+            li = message
+    .post_detail.textarea
+      = form.text_area :content
+    .post_detail.image
+      p = form.label :"写真"
+      = form.file_field :image
+    .btn
+        = form.submit "シェアする", class: "submit_btn"

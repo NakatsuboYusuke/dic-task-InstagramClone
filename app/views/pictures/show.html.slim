@@ -1,6 +1,36 @@
-p#notice = notice
-
-
-=> link_to 'Edit', edit_picture_path(@picture)
-'|
-=< link_to 'Back', pictures_path
+.content.show
+  .info
+    /.info_post
+      = link_to "/users/#{@picture.user.id}" do
+        p.name @picture.user.user_name
+      .info_image
+        /p.image = image_tag picture.user.image.url
+  /- if @picture.user_id == current_user.id
+    button#js-show-popup …
+    .modal_wrapper
+      #js-popup.popup
+        .popup-inner
+          #js-close-btn.close-btn
+            .func
+              ul
+                li = link_to "投稿を編集", edit_picture_path(@picture.id)
+                li = link_to "投稿を削除", picture_path(@picture.id), method: :delete
+      #js-black-bg.black-background
+  p.detail = @picture.content
+  /.action
+    .favorite
+      - if @favorite.present?
+        = link_to favorite_path(id: @favorite.id), method: :delete, class: "like_btn" do
+          span.fa.fa-heart
+      - else
+        = link_to favorites_path(picture_id: @picture.id), method: :post, class: "dislike_btn" do
+          span.fa.fa-heart
+        span.like_count
+      - if @favorite_count == 0
+        strong 「いいね！」
+        した人はまだいません
+      - else
+        = @favorite_count
+    .comment
+        /コメント機能を追加
+  p.date #{time_ago_in_words(@picture.created_at)}前

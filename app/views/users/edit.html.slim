@@ -1,0 +1,17 @@
+.content.new
+  = form_with model: @user, local: true do |form|
+    .post_detail.email
+      = form.email_field :email, placeholder: "携帯電話番号またはメールアドレス"
+    .post_detail.full_name
+      = form.text_field :full_name, placeholder: "フルネーム"
+    .post_detail.user_name
+      = form.text_field :full_name, placeholder: "ユーザーネーム"
+    .post_detail.password
+      = form.password_field :password, placeholder: "パスワード"
+    .post_detail.password_confirmation
+      = form.password_field :password_confirmation, placeholder: "確認用パスワード"
+    .post_detail.image
+      p = form.label :"写真"
+      = form.file_field :image
+    .btn
+      = form.submit "登録する", class: "submit_btn"
