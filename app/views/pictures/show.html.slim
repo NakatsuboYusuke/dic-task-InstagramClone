@@ -1,10 +1,10 @@
 .content.show
   .info
-    .info_post
-      = link_to "/users/#{@picture.user.id}" do
-        p.name @picture.user.user_name
-      .info_image
-        /p.image = image_tag picture.user.image.url
+.info_post
+  = link_to "/users/#{@picture.user.id}" do
+    p.name = @picture.user.user_name
+  .info_image
+    p.image = image_tag @picture.user.image.url
   - if @picture.user_id == current_user.id
     button#js-show-popup …
     .modal_wrapper
@@ -17,7 +17,7 @@
                 li = link_to "投稿を削除", picture_path(@picture.id), method: :delete
       #js-black-bg.black-background
   p.detail = @picture.content
-  /.action
+  .action
     .favorite
       - if @favorite.present?
         = link_to favorite_path(id: @favorite.id), method: :delete, class: "like_btn" do
@@ -28,9 +28,9 @@
         span.like_count
       - if @favorite_count == 0
         strong 「いいね！」
-        した人はまだいません
+        span  した人はまだいません
       - else
         = @favorite_count
     .comment
-        /コメント機能を追加
+      /コメント機能を追加
   p.date #{time_ago_in_words(@picture.created_at)}前

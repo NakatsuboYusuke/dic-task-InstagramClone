@@ -1,0 +1,2 @@
+class ChangeImageColumn < ApplicationRecord
+end
