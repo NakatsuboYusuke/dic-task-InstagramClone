@@ -5,7 +5,7 @@
         ul
           - @picture.errors.full_messages.each do |message|
             li = message
-    /.post_detail.image
+    .post_detail.image
       p = form.label :"写真"
       = image_tag @picture.image.url if @picture.image && @picture.image.url
       = form.file_field :image

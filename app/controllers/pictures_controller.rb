@@ -1,7 +1,7 @@
 class PicturesController < ApplicationController
 
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
-  #before_action :set_favorite, only: [:show]
+  before_action :set_favorite, only: [:show]
 
   # skip_before_action
   #skip_before_action :login_forbided
@@ -11,7 +11,7 @@ class PicturesController < ApplicationController
   end
 
   def show
-    #@favorite = current_user.favorites.find_by(picture_id: @picture.id)
+    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
 
   def new
@@ -23,7 +23,7 @@ class PicturesController < ApplicationController
 
   def create
     @picture = Picture.new(picture_params)
-    #@picture.user_id = current_user.id
+    @picture.user_id = current_user.id
     if params[:back]
       render :new
     else
@@ -53,7 +53,7 @@ class PicturesController < ApplicationController
 
   def confirm
     @picture = Picture.new(picture_params)
-    #@picture.user_id = current_user.id
+    @picture.user_id = current_user.id
     render :new if @picture.invalid?
   end
 
@@ -64,17 +64,16 @@ class PicturesController < ApplicationController
   end
 
   def picture_params
-    params.require(:picture).permit(:content, :image)
-    #params.require(:picture).permit(:content, :image, :image_cache)
+    params.require(:picture).permit(:content, :image, :image_cache)
   end
 
-  #def set_favorite
-    #@favorite_count = Favorite.where(picture_id: @picture.id).count
-  #end
+  def set_favorite
+    @favorite_count = Favorite.where(picture_id: @picture.id).count
+  end
 
   # instance method for association
-  #def user
-    #return User.find_by(id: @picture.user_id)
-  #end
+  def user
+    return User.find_by(id: @picture.user_id)
+  end
 
 end

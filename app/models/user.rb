@@ -15,11 +15,11 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   # get image
-  #mount_uploader :image, ImageUploader
+  mount_uploader :image, ImageUploader
 
   # association
-  #has_many :pictures, dependent: :destroy
-  #has_many :favorites, dependent: :destroy
-  #has_many :favorite_pictures, through: :favorites, source: :picture
+  has_many :pictures, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_pictures, through: :favorites, source: :picture
 
 end

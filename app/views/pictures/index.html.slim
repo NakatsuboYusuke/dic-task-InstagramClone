@@ -4,8 +4,8 @@
       .info_post
         = link_to picture_path(picture.id)
           p.name = picture.user.user_name
-        /.info_image
-          /p.image = image_tag picture.user.image.url
+        .info_image
+          p.image = image_tag picture.user.image.url
     button#js-show-popup …
     .modal_wrapper
       #js-popup.popup
@@ -18,13 +18,18 @@
                   li = link_to "投稿を編集", edit_picture_path(picture.id)
                   li = link_to "投稿を削除", picture_path(picture.id), method: :delete
       #js-black-bg.black-background
-    /p.image = image_tag picture.image.url
+    p.image = image_tag picture.image.url
     p.detail = picture.content
     .action
       .favorite
         p.like_btn
           span.fa.fa-heart
-          /span.like_count = picture.favorites.where(picture_id: picture).count
+          span.like_count
+          - if picture.favorites.where(picture_id: picture).count == 0
+            strong 「いいね！」
+            span  した人はまだいません
+          - else
+            = picture.favorites.where(picture_id: picture).count
       .comment
         /コメント機能を追加
     p.date #{time_ago_in_words(picture.created_at)}前
