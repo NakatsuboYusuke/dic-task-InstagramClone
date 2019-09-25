@@ -14,12 +14,12 @@ html
           .picture
             = link_to "カメラアイコン", new_picture_path
           .logo
-            /h1 = link_to root_path do
+            h1 = link_to root_path do
                 = image_tag "logo.png"
-                span LookboolApp
+                span InstadrawApp
           #wrapper
             nav.nav.login
-              /ul
+              ul
                 - if logged_in?
                   li.subnav アカウント
                   li = link_to "プロフィールを編集", user_path(current_user.id)

@@ -9,11 +9,12 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     attributes:
       user:
-        first_name: 姓
-        last_name: 名
-        gender: 性別
+        email: メールアドレス
+        full_name: フルネーム
+        user_name: ユーザーネーム
         password: パスワード
         password_confirmation: 確認用パスワード
+        image: 写真
       picture:
         content: 本文
   date:

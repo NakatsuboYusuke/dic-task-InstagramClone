@@ -1,11 +1,11 @@
 .content.show
   .info
-    /.info_post
+    .info_post
       = link_to "/users/#{@picture.user.id}" do
         p.name @picture.user.user_name
       .info_image
         /p.image = image_tag picture.user.image.url
-  /- if @picture.user_id == current_user.id
+  - if @picture.user_id == current_user.id
     button#js-show-popup …
     .modal_wrapper
       #js-popup.popup

@@ -1,6 +1,6 @@
 .content.create
   = form_with model: @picture, local: true do |form|
-    /- if @picture.errors.any?
+    - if @picture.errors.any?
       .error_content
         ul
           - @picture.errors.full_messages.each do |message|

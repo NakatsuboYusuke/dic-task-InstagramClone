@@ -9,7 +9,7 @@
 .content.new
   = form_with model: @user, local: true do |form|
     .post_detail.email
-      = form.email_field :email, placeholder: "携帯電話番号またはメールアドレス"
+      = form.email_field :email, placeholder: "メールアドレス"
     .post_detail.full_name
       = form.text_field :full_name, placeholder: "フルネーム"
     .post_detail.user_name

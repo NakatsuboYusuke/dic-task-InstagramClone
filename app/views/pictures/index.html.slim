@@ -1,10 +1,10 @@
 .content.list
   - @pictures.each do |picture|
     .info
-      /.info_post
+      .info_post
         = link_to picture_path(picture.id)
           p.name = picture.user.user_name
-        .info_image
+        /.info_image
           /p.image = image_tag picture.user.image.url
     button#js-show-popup …
     .modal_wrapper
@@ -14,7 +14,7 @@
             .func
               ul
                 li = link_to "投稿へ移動", picture_path(picture.id)
-            /- if picture.user_id == current_user.id
+            - if picture.user_id == current_user.id
                   li = link_to "投稿を編集", edit_picture_path(picture.id)
                   li = link_to "投稿を削除", picture_path(picture.id), method: :delete
       #js-black-bg.black-background

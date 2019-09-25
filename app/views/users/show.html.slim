@@ -4,7 +4,7 @@
         p.name = @user.user_name
       .info_image
         /p.image = image_tag @user.image.url
-    /- if @user.id == current_user.id
+    - if @user.id == current_user.id
       p = link_to "プロフィールを編集", edit_user_path(@user.id)
   p.info_full = @user.full_name
   .post

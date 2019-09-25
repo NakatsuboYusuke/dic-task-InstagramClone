@@ -1,5 +1,8 @@
 class HomesController < ApplicationController
 
+  # skip_before_action
+  #skip_before_action :login_required
+
   def index
   end
 

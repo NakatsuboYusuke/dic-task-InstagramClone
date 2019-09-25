@@ -1,0 +1,18 @@
+.content.login
+  = form_with scope: :session, url: login_path, local: true do |form|
+    .error_content
+      = @error_message
+    .post_detail.email
+      dl
+        dt = form.label :"メールアドレス"
+        dd = form.email_field :email
+    .post_detail.password
+      dl
+        dt = form.label :"パスワード"
+        dd = form.password_field :password
+    .btn
+      = form.submit "ログイン", class: "submit_btn"
+  .login
+    p
+      | アカウントをお持ちでないですか？
+      = link_to "登録する", new_user_path, class: "submit_btn"
