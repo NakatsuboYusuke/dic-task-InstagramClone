@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
 
-  before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :set_pictures, only: [:show, :edit, :update, :destroy]
   before_action :set_favorite, only: [:show]
 
   # skip_before_action
@@ -8,6 +8,7 @@ class PicturesController < ApplicationController
 
   def index
     @pictures = Picture.all.order(created_at: :desc)
+    #@picture = current_user.favorites
   end
 
   def show
@@ -59,7 +60,7 @@ class PicturesController < ApplicationController
 
   private
 
-  def set_picture
+  def set_pictures
     @picture = Picture.find(params[:id])
   end
 

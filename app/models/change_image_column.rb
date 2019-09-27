@@ -1,2 +1,0 @@
-class ChangeImageColumn < ApplicationRecord
-end

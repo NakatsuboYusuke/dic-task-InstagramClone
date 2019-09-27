@@ -14,22 +14,29 @@
             .func
               ul
                 li = link_to "投稿へ移動", picture_path(picture.id)
-            - if picture.user_id == current_user.id
+                - if picture.user_id == current_user.id
                   li = link_to "投稿を編集", edit_picture_path(picture.id)
                   li = link_to "投稿を削除", picture_path(picture.id), method: :delete
       #js-black-bg.black-background
     p.image = image_tag picture.image.url
     p.detail = picture.content
     .action
-      .favorite
-        p.like_btn
-          span.fa.fa-heart
-          span.like_count
-          - if picture.favorites.where(picture_id: picture).count == 0
-            strong 「いいね！」
-            span  した人はまだいません
-          - else
-            = picture.favorites.where(picture_id: picture).count
+      - @picture = picture.id
+      div id="favorite_#{@picture}" class="favorite"
+        - if favorite?(picture, current_user)
+          .like_btn.delete
+            = link_to favorite_path(id: picture.id), method: :delete, remote: :true, class: "like" do
+              span.fa.fa-heart ダミー解除
+        - else
+          .dislike_btn.create
+            = link_to favorites_path(picture_id: picture.id), method: :post, remote: :true, class: "dislike" do
+              span.fa.fa-heart ダミーいいね
+        - if picture.favorites.where(picture_id: picture).count == 0
+          strong 「いいね！」
+          span  した人はまだいません
+        - else
+          = picture.favorites.where(picture_id: picture).count
+      /= render partial: 'favorites/favorite', picture: @picture, favorite: @favorite, favorite_count: @favorite_count
       .comment
         /コメント機能を追加
     p.date #{time_ago_in_words(picture.created_at)}前
