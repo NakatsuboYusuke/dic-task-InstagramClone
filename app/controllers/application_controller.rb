@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   # helper method
-  helper_method :current_user, :logged_in?, :current_user?, :authenticate_user, :convert_birthday_time, :render_404, :render_405
+  helper_method :current_user, :logged_in?, :current_user?, :authenticate_user, :convert_birthday_time, :favorite?, :render_404, :render_405
   #before_action :login_required
   #before_action :login_forbided
 
@@ -32,6 +32,11 @@ class ApplicationController < ActionController::Base
   def convert_birthday_time(birthday)
     birthday.strftime("%Y年%m月%d日")
     # AM => 午前 PM => 午後 に変換したい
+  end
+
+  # favorite by ajax
+  def favorite?(picture, user)
+    picture.favorites.find_by(user_id: user.id)
   end
 
   # 404 or 500

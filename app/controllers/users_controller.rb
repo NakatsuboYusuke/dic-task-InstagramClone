@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
   before_action :user_params, only: [:create]
-  before_action :set_users, only: [:show, :edit, :update]
+  before_action :set_users, only: [:show, :edit, :update, :feed]
+  before_action :set_favorite, only: [:feed]
 
   # skip_before_action
   #skip_before_action :login_required
@@ -37,6 +38,11 @@ class UsersController < ApplicationController
     end
   end
 
+  # => findはidで取得、find_byはid以外で取得
+  def feed
+    @favorites = current_user.favorite_pictures
+  end
+
   private
 
   def set_users
@@ -44,8 +50,12 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :full_name, :user_name, :password, :password_confirmation, :image)
+    params.require(:user).permit(:email, :full_name, :user_name, :password, :password_confirmation, :image, :image_cache)
     #params.require(:user).permit(:email, :full_name, :user_name, :password, :password_confirmation, :image, :birthday, :gender)
+  end
+
+  def set_favorite
+    @favorite_count = Favorite.where(user_id: @user.id).count
   end
 
 end

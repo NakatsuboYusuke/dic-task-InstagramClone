@@ -25,6 +25,6 @@ Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy]
 
   # 404, 500
-  get '*path', controller: 'application', action: 'render_404'
+  #get '*path', controller: 'application', action: 'render_404'
 
 end
