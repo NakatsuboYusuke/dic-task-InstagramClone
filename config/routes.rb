@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # pictures
   resources :pictures do
+    resources :comments
     collection do
       post :confirm
     end

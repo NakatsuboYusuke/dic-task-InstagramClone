@@ -10,4 +10,6 @@
   strong 「いいね！」
   span  した人はまだいません
 - else
-  = @favorite_count
+  .total_like
+    strong #{@favorite_count}人
+    span さんが「いいね！」しました
