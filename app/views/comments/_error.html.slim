@@ -1,0 +1,19 @@
+- @comments.each do |comment|
+  - if comment.id.present?
+    /p.name = link_to comment.user.name, user_path(comment.user.id)
+    p.detail = comment.content
+    - if comment.user == current_user
+      button#js-show-popup …
+      .modal_wrapper
+        #js-popup.popup
+          .popup-inner
+            #js-close-btn.close-btn
+              .func
+                ul
+                  li = link_to 'コメントを削除', picture_comment_path(comment.picture_id, comment.id), method: :delete, remote: :true
+      #js-black-bg.black-background
+- if @comment.errors.any?
+  #error_content.error_content
+    ul
+      - @comment.errors.full_messages.each do |message|
+        li = message

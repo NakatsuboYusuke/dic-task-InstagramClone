@@ -19,21 +19,10 @@
   p.image = image_tag @picture.image.url
   p.detail = @picture.content
   .action
-    <div id="favorite_#{@picture.id}" class="favorite">
-      - if favorite?(@picture, current_user)
-        .like_btn.delete
-          = link_to favorite_path(id: @picture.id), method: :delete, remote: :true, class: "like" do
-            span.fa.fa-heart ダミー解除
-      - else
-        .dislike_btn.create
-          = link_to favorites_path(picture_id: @picture.id), method: :post, remote: :true, class: "dislike" do
-            span.fa.fa-heart ダミーいいね
-      - if @favorite_count == 0
-        strong 「いいね！」
-        span  した人はまだいません
-      - else
-        = @favorite_count
-      /= render partial: 'favorites/favorite', picture: @picture, favorite: @favorite, favorite_count: @favorite_count
-    .comment
-      /コメント機能を追加
+    div id="favorite_#{@picture.id}" class="favorite"
+      = render partial: 'favorites/favorite', picture: @picture, current_user: @current_user.id, favorite: @favorite, favorite_count: @favorite_count
+    #comment.comment
+      = render partial: 'comments/index', locals: {comments: @comments, picture: @picture}
+    - if logged_in?
+      = render partial: 'comments/form', locals: {comment: @comment, picture: @picture}
   p.date #{time_ago_in_words(@picture.created_at)}前

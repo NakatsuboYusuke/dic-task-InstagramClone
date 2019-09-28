@@ -8,11 +8,15 @@ class PicturesController < ApplicationController
 
   def index
     @pictures = Picture.all.order(created_at: :desc)
-    #@picture = current_user.favorites
+    @comments = Comment.all
   end
 
   def show
     @favorite = current_user.favorites.find_by(picture_id: @picture.id)
+    # get all comments
+    @comments = @picture.comments
+    # get this comment
+    @comment = @picture.comments.build # include @picture.id => @comment.picture_id
   end
 
   def new
