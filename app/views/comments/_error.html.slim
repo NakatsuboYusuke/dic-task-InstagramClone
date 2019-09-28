@@ -1,6 +1,11 @@
 - @comments.each do |comment|
   - if comment.id.present?
-    /p.name = link_to comment.user.name, user_path(comment.user.id)
+    .info
+      .info_post
+        = link_to user_path(comment.user.id)
+          p.name = link_to comment.user.user_name
+          .info_image
+            p.image = image_tag comment.user.image.url
     p.detail = comment.content
     - if comment.user == current_user
       button#js-show-popup …

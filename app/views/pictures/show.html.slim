@@ -20,7 +20,7 @@
   p.detail = @picture.content
   .action
     div id="favorite_#{@picture.id}" class="favorite"
-      = render partial: 'favorites/favorite', picture: @picture, current_user: @current_user.id, favorite: @favorite, favorite_count: @favorite_count
+      = render partial: 'favorites/favorite', picture: @picture, current_user: @current_user.id, favorite: @favorite, favorite_count: @favorite_count, favorite_user: @favorite_user
     #comment.comment
       = render partial: 'comments/index', locals: {comments: @comments, picture: @picture}
     - if logged_in?

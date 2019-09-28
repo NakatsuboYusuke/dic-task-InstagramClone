@@ -38,6 +38,6 @@
         - else
           .total_like
             strong #{@favorite_count}人
-            span さんが「いいね！」しました
+            span が「いいね！」しました
       /= render partial: 'favorites/favorite', picture: @picture, favorite: @favorite, favorite_count: @favorite_count
     p.date #{time_ago_in_words(picture.created_at)}前
