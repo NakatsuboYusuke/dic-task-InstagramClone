@@ -33,6 +33,7 @@ class PicturesController < ApplicationController
       render :new
     else
       if @picture.save
+        ConfirmMailer.creation_email(@picture).deliver_now #.deliver_later(wait: 5.minutes)
         flash[:notice] = "投稿が完了しました"
         redirect_to pictures_path
       else
