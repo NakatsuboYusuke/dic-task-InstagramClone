@@ -8,6 +8,7 @@ class FavoritesController < ApplicationController
     @favorite.save
     @picture = Picture.find(params[:picture_id])
     @favorite_count = Favorite.where(picture_id: @picture.id).count
+    @favorite_user = User.find_by(id: Favorite.first.user_id).user_name
     render 'index.js.slim'
     #redirect_to picture_path(@favorite.picture_id)
   end
