@@ -40,8 +40,4 @@
             strong #{@favorite_count}人
             span さんが「いいね！」しました
       /= render partial: 'favorites/favorite', picture: @picture, favorite: @favorite, favorite_count: @favorite_count
-    /#comment.comment
-      = render partial: 'comments/index', locals: {comments: @comments, picture: @picture}
-    /- if logged_in?
-      = render partial: 'comments/form', locals: {comment: @comment, picture: @picture}
     p.date #{time_ago_in_words(picture.created_at)}前

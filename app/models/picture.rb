@@ -1,6 +1,7 @@
 class Picture < ApplicationRecord
 
   validates :content, presence: true
+  validates :image, presence: true
 
   # association
   belongs_to :user

@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   # favorites
   resources :favorites, only: [:create, :destroy]
 
+  # letter_opener
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   # 404, 500
   #get '*path', controller: 'application', action: 'render_404'
 
