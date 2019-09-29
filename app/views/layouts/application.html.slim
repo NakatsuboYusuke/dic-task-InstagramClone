@@ -12,7 +12,8 @@ html
       header.header
         .inner
           .picture
-            = link_to "カメラアイコン", new_picture_path
+            = link_to new_picture_path do
+              = image_tag "camera.png"
           .logo
             h1 = link_to root_path do
                 = image_tag "logo.png"
