@@ -8,12 +8,13 @@
             p.image = image_tag comment.user.image.url
     p.detail = comment.content
     - if comment.user == current_user
-      button#js-show-popup …
-      .modal_wrapper
-        #js-popup.popup
-          .popup-inner
-            #js-close-btn.close-btn
-              .func
-                ul
-                  li = link_to 'コメントを削除', picture_comment_path(comment.picture_id, comment.id), method: :delete, remote: :true
-      #js-black-bg.black-background
+      .content
+        button class="js-modal-open" data-target="#{comment.id}"
+          = image_tag "reader.png"
+      div id="#{comment.id}" class="modal"
+        div class="modal_bg js-modal-close" data-target="#{comment.id}"
+          .modal_content
+            .func
+              ul
+                li = link_to 'コメントを削除', picture_comment_path(comment.picture_id, comment.id), method: :delete, remote: :true
+        #js-black-bg.black-background

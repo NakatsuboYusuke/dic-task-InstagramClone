@@ -12,13 +12,14 @@ gem 'puma', '~> 3.11'
 
 # View/Font
 gem 'sass-rails', '~> 5.0'
+gem 'autoprefixer-rails'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'slim-rails'
 gem 'html2slim'
-gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
+gem 'gon'
 
 # Debug
 gem 'pry-rails'
