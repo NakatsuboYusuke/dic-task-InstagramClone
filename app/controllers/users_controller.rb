@@ -50,8 +50,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :full_name, :user_name, :password, :password_confirmation, :image, :image_cache)
-    #params.require(:user).permit(:email, :full_name, :user_name, :password, :password_confirmation, :image, :birthday, :gender)
+    params.require(:user).permit(:email, :full_name, :user_name, :password, :password_confirmation, :image, :birthday, :gender)
   end
 
   def set_favorite

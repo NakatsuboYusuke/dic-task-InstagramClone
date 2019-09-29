@@ -1,12 +1,29 @@
 .content.profile
-  .info
-    .info_post
-      p.name = @user.user_name
-      .info_image
-        p.image = image_tag @user.image.url
+  .detail
+    p.image = image_tag @user.image.url
+    dl
+      dt 名前
+      dd = @user.full_name
+    dl
+      dt ユーザーネーム
+      dd = @user.user_name
+    dl
+      dt メールアドレス
+      dd = @user.email
+    dl
+      dt 性別
+      - if @user.gender.present?
+        dd = @user.gender
+      - else
+        dd 登録されていません
+    dl
+      dt 生年月日
+      - if @user.birthday.present?
+        dd #{convert_birthday_time(@user.birthday)}
+      - else
+        dd 登録されていません
     - if @user.id == current_user.id
       p = link_to "プロフィールを編集", edit_user_path(@user.id)
-  p.info_full = @user.full_name
   .post
     - @pictures.each do |picture|
       .info
