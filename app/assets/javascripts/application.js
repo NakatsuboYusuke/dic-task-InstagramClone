@@ -13,5 +13,5 @@
 //= require rails-ujs
 //= require activestorage
 //= require jquery/dist/jquery.js
-//= require instadraw
+//= require instadrawapp
 //= require_tree .

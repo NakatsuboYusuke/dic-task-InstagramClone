@@ -1,15 +1,15 @@
 - if favorite?(@picture, current_user)
   .like_btn.delete
     = link_to favorite_path(id: @picture.id), method: :delete, remote: :true, class: "like" do
-      span.fa.fa-heart ダミー解除
+      span.fa.fa-heart
 - else
   .dislike_btn.create
     = link_to favorites_path(picture_id: @picture.id), method: :post, remote: :true, class: "dislike" do
-      span.fa.fa-heart ダミーいいね
+      span.fa.fa-heart
 - if @favorite_count == 0
   strong 「いいね！」
   span  した人はまだいません
 - else
   .total_like
     strong #{@favorite_count}人
-    span さんが「いいね！」しました
+    span が「いいね！」しました

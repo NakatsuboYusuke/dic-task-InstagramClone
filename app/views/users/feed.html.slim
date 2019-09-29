@@ -7,18 +7,19 @@
             p.name = favorite.user.user_name
             .info_image
               p.image = image_tag favorite.user.image.url
-      button#js-show-popup …
-      .modal_wrapper
-        #js-popup.popup
-          .popup-inner
-            #js-close-btn.close-btn
-              .func
-                ul
-                  li = link_to "投稿へ移動", picture_path(favorite.id)
-                  - if favorite.user_id == current_user.id
-                    li = link_to "投稿を編集", edit_picture_path(favorite.id)
-                    li = link_to "投稿を削除", picture_path(favorite.id), method: :delete
-      #js-black-bg.black-background
+      .content
+        button class="js-modal-open" data-target="#{favorite.id}"
+          = image_tag "reader.png"
+      div id="#{favorite.id}" class="modal"
+        div class="modal_bg js-modal-close" data-target="#{favorite.id}"
+          .modal_content
+            .func
+              ul
+                li = link_to "投稿へ移動", picture_path(favorite.id)
+                - if favorite.user_id == current_user.id
+                  li = link_to "投稿を編集", edit_picture_path(favorite.id)
+                  li = link_to "投稿を削除", picture_path(favorite.id), method: :delete
+          #js-black-bg.black-background
       p.image = image_tag favorite.image.url
       p.detail = favorite.content
       .action
@@ -31,8 +32,6 @@
               span  した人はまだいません
             - else
               = @favorite_count
-        .comment
-        /コメント機能を追加
   - else
     p 投稿に誰かが「いいね！」やコメントした場合、ここで確認することができます。
     p = link_to "写真をシェアしてみよう", pictures_path

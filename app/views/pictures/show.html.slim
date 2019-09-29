@@ -6,16 +6,16 @@
     .info_image
       p.image = image_tag @picture.user.image.url
     - if @picture.user_id == current_user.id
-      button#js-show-popup …
-      .modal_wrapper
-        #js-popup.popup
-          .popup-inner
-            #js-close-btn.close-btn
-              .func
-                ul
-                  li = link_to "投稿を編集", edit_picture_path(@picture.id)
-                  li = link_to "投稿を削除", picture_path(@picture.id), method: :delete
-      #js-black-bg.black-background
+      .content
+        button class="js-modal-open" data-target="#{@picture.id}"
+          = image_tag "reader.png"
+      div id="#{@picture.id}" class="modal"
+        div class="modal_bg js-modal-close" data-target="#{@picture.id}"
+          .modal_content
+            .func
+              ul
+                li = link_to "投稿を編集", edit_picture_path(@picture.id)
+                li = link_to "投稿を削除", picture_path(@picture.id), method: :delete
   p.image = image_tag @picture.image.url
   p.detail = @picture.content
   .action

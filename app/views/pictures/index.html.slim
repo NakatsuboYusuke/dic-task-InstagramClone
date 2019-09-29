@@ -6,18 +6,18 @@
           p.name = picture.user.user_name
         .info_image
           p.image = image_tag picture.user.image.url
-    button#js-show-popup …
-    .modal_wrapper
-      #js-popup.popup
-        .popup-inner
-          #js-close-btn.close-btn
-            .func
-              ul
-                li = link_to "投稿へ移動", picture_path(picture.id)
-                - if picture.user_id == current_user.id
-                  li = link_to "投稿を編集", edit_picture_path(picture.id)
-                  li = link_to "投稿を削除", picture_path(picture.id), method: :delete
-      #js-black-bg.black-background
+    .content
+      button class="js-modal-open" data-target="#{picture.id}"
+        = image_tag "reader.png"
+    div id="#{picture.id}" class="modal"
+      div class="modal_bg js-modal-close" data-target="#{picture.id}"
+      .modal_content
+        .func
+          ul
+            li = link_to "投稿へ移動", picture_path(picture.id)
+            - if picture.user_id == current_user.id
+              li = link_to "投稿を編集", edit_picture_path(picture.id)
+              li = link_to "投稿を削除", picture_path(picture.id), method: :delete
     p.image = image_tag picture.image.url
     p.detail = picture.content
     .action
@@ -27,11 +27,11 @@
         - if favorite?(picture, current_user)
           .like_btn.delete
             = link_to favorite_path(id: picture.id), method: :delete, remote: :true, class: "like" do
-              span.fa.fa-heart ダミー解除
+              span.fa.fa-heart
         - else
           .dislike_btn.create
             = link_to favorites_path(picture_id: picture.id), method: :post, remote: :true, class: "dislike" do
-              span.fa.fa-heart ダミーいいね
+              span.fa.fa-heart
         - if @favorite_count == 0
           strong 「いいね！」
           span  した人はまだいません

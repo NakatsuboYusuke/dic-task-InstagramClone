@@ -38,7 +38,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # => findはidで取得、find_byはid以外で取得
   def feed
     @favorites = current_user.favorite_pictures
   end
