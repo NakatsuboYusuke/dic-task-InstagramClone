@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   #skip_before_action :login_forbided, only: [:show, :edit, :update]
 
   def show
+    @pictures = @user.pictures
   end
 
   def new
