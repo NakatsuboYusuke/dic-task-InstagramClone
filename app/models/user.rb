@@ -7,8 +7,10 @@ class User < ApplicationRecord
   #validates :birthday, presence: true
   #validates :gender, presence: true
 
-
   before_validation { email.downcase! }
+
+   # get gender
+   enum gender: { "男性": 1, "女性": 2, "カスタム": 3 }
 
   # get password
   has_secure_password
