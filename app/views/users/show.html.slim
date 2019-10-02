@@ -1,10 +1,16 @@
 .content.profile
-  .detail
-    p.image = image_tag @user.image.url
+  .profile_detail
+    .wrapper
+      .image_wrap
+        p.image = image_tag @user.image.url
+      .name_wrap
+        p.name = @user.user_name
+        - if @user.id == current_user.id
+          = link_to "プロフィールを編集", edit_user_path(@user.id)
     dl
       dt 名前
       dd = @user.full_name
-    dl
+    /dl
       dt ユーザーネーム
       dd = @user.user_name
     dl
@@ -14,38 +20,33 @@
       dt 性別
       - if @user.gender.present?
         dd = @user.gender
-      - else
-        dd 登録されていません
     dl
       dt 生年月日
       - if @user.birthday.present?
         dd #{convert_birthday_time(@user.birthday)}
-      - else
-        dd 登録されていません
-    - if @user.id == current_user.id
-      p = link_to "プロフィールを編集", edit_user_path(@user.id)
   .post
     - @pictures.each do |picture|
+      /階層、クラス名を変更。他の箇所も修正すること
       .info
-        .info_post
-          = link_to picture_path(picture.id)
-            p.name = picture.user.user_name
+        .info_wrap
           .info_image
             p.image = image_tag picture.user.image.url
-      .content
-        button class="js-modal-open" data-target="#{picture.id}"
-          = image_tag "reader.png"
-      div id="#{picture.id}" class="modal"
-        div class="modal_bg js-modal-close" data-target="#{picture.id}"
-        .modal_content
-          .func
-            ul
-              li = link_to "投稿へ移動", picture_path(picture.id)
-              - if picture.user_id == current_user.id
-                li = link_to "投稿を編集", edit_picture_path(picture.id)
-                li = link_to "投稿を削除", picture_path(picture.id), method: :delete
+          .info_post
+            = link_to picture_path(picture.id)
+              p.name = picture.user.user_name
+        .modal_btn
+          button class="js-modal-open" data-target="#{picture.id}"
+            = image_tag "reader.png"
+        div id="#{picture.id}" class="modal"
+          div class="modal_bg js-modal-close" data-target="#{picture.id}"
+          .modal_content
+            .modal_func
+              ul
+                li = link_to "投稿へ移動", picture_path(picture.id)
+                - if picture.user_id == current_user.id
+                  li = link_to "投稿を編集", edit_picture_path(picture.id)
+                  li = link_to "投稿を削除", picture_path(picture.id), method: :delete
       p.image = image_tag picture.image.url
-      p.detail = picture.content
       .action
         - @picture = picture.id
         - @favorite_count = picture.favorites.where(picture_id: picture).count
@@ -53,11 +54,11 @@
           - if favorite?(picture, current_user)
             .like_btn.delete
               = link_to favorite_path(id: picture.id), method: :delete, remote: :true, class: "like" do
-                span.fa.fa-heart
+                = image_tag "like.png"
           - else
             .dislike_btn.create
               = link_to favorites_path(picture_id: picture.id), method: :post, remote: :true, class: "dislike" do
-                span.fa.fa-heart
+                = image_tag "unlike.png"
           - if @favorite_count == 0
             strong 「いいね！」
             span  した人はまだいません
@@ -66,4 +67,5 @@
               strong #{@favorite_count}人
               span が「いいね！」しました
         /= render partial: 'favorites/favorite', picture: @picture, favorite: @favorite, favorite_count: @favorite_count
+      p.detail = picture.content
       p.date #{time_ago_in_words(picture.created_at)}前

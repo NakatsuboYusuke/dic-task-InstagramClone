@@ -1,5 +1,6 @@
-= form_with model: [picture, comment] do |form|
-  .post_detail.textarea
-    = form.text_area :content, placeholder: "コメントを追加…"
-  .btn
-    = form.submit "投稿する", class: "submit_btn"
+.comment.new
+  = form_with model: [picture, comment] do |form|
+    .post_detail.comment_area
+      = form.text_area :content, placeholder: "コメントを追加…"
+    .btn.comment_btn
+      = form.submit "投稿する", class: "account_btn"

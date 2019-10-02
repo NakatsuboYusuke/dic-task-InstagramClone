@@ -11,8 +11,12 @@ Rails.application.routes.draw do
   end
 
   # users
-  resources :users
-  get '/users/:id/feed', to: 'users#feed'
+  resources :users do
+    member do
+      get :feed
+    end
+  end
+  #get '/users/:id/feed', to: 'users#feed'
 
   # sessions
   get '/login', to: 'sessions#new'

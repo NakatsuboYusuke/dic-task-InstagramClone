@@ -1,12 +1,12 @@
-.tit
-  h2 ロゴ画像が入ります
+.tit.new
+  h2 = image_tag "logo.png"
   p 友達の写真や動画をチェックしよう
-- if @user.errors.any?
-  .error_content
-    ul
-      - @user.errors.full_messages.each do |message|
-        li = message
 .content.new
+  - if @user.errors.any?
+    .error_content
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
   = form_with model: @user, local: true do |form|
     .post_detail.email
       = form.email_field :email, placeholder: "メールアドレス"
@@ -23,8 +23,12 @@
       = form.file_field :image
     .btn
       = form.submit "登録する", class: "submit_btn"
-  p.attention 登録することで、Instadrawの利用規約、データに関するポリシー、Cookieポリシーに同意するものとします。
-  .login
+  .sub_content
+    p
+      | 登録することで、Instadrawの
+      strong 利用規約、データに関するポリシー、Cookieポリシー
+      | に同意するものとします。
+  .sub_content
     p
       | アカウントをお持ちですか？
-      = link_to "ログインする", login_path, class: "submit_btn"
+      = link_to "ログインする", login_path, class: "enter_btn"

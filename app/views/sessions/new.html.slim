@@ -12,7 +12,7 @@
         dd = form.password_field :password
     .btn
       = form.submit "ログイン", class: "submit_btn"
-  .login
-    p
-      | アカウントをお持ちでないですか？
-      = link_to "登録する", new_user_path, class: "submit_btn"
+    .registration
+      p
+        | アカウントをお持ちですか？
+        = link_to "登録する", new_user_path, class: "enter_btn"

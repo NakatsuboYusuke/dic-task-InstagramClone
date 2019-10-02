@@ -1,4 +1,4 @@
-.content.create
+.content.edit
   = form_with model: @picture, local: true do |form|
     - if @picture.errors.any?
       .error_content
@@ -6,6 +6,7 @@
           - @picture.errors.full_messages.each do |message|
             li = message
     .post_detail.textarea
+      p = form.label :"キャプション"
       = form.text_area :content
     .post_detail.image
       p = form.label :"写真"

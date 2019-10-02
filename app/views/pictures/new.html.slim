@@ -1,10 +1,10 @@
-.content.create
-  = form_with model: @picture, url: confirm_pictures_path, local: true do |form|
-    - if @picture.errors.any?
+.content.new
+  - if @picture.errors.any?
       .error_content
         ul
           - @picture.errors.full_messages.each do |message|
             li = message
+  = form_with model: @picture, url: confirm_pictures_path, local: true do |form|
     .post_detail.image
       p = form.label :"写真"
       = image_tag @picture.image.url if @picture.image && @picture.image.url

@@ -1,28 +1,30 @@
 .content.show
-  .info
-    .info_post
-      = link_to "/users/#{@picture.user.id}" do
-        p.name = @picture.user.user_name
-    .info_image
-      p.image = image_tag @picture.user.image.url
-    - if @picture.user_id == current_user.id
-      .content
-        button class="js-modal-open" data-target="#{@picture.id}"
-          = image_tag "reader.png"
-      div id="#{@picture.id}" class="modal"
-        div class="modal_bg js-modal-close" data-target="#{@picture.id}"
-          .modal_content
-            .func
-              ul
-                li = link_to "投稿を編集", edit_picture_path(@picture.id)
-                li = link_to "投稿を削除", picture_path(@picture.id), method: :delete
-  p.image = image_tag @picture.image.url
-  p.detail = @picture.content
-  .action
-    div id="favorite_#{@picture.id}" class="favorite"
-      = render partial: 'favorites/favorite', picture: @picture, current_user: @current_user.id, favorite: @favorite, favorite_count: @favorite_count, favorite_user: @favorite_user
-    #comment.comment
-      = render partial: 'comments/index', locals: {comments: @comments, picture: @picture}
-    - if logged_in?
-      = render partial: 'comments/form', locals: {comment: @comment, picture: @picture}
-  p.date #{time_ago_in_words(@picture.created_at)}前
+  .post
+    .info
+      .info_wrap
+        .info_image
+          p.image = image_tag @picture.user.image.url
+        .info_post
+          = link_to user_path(@picture.user.id) do
+            p.name = @picture.user.user_name
+      - if @picture.user_id == current_user.id
+        .modal_btn
+          button class="js-modal-open" data-target="#{@picture.id}"
+            = image_tag "reader.png"
+        div id="#{@picture.id}" class="modal"
+          div class="modal_bg js-modal-close" data-target="#{@picture.id}"
+            .modal_content
+              .modal_func
+                ul
+                  li = link_to "投稿を編集", edit_picture_path(@picture.id)
+                  li = link_to "投稿を削除", picture_path(@picture.id), method: :delete
+    p.image = image_tag @picture.image.url
+    .action
+      div id="favorite_#{@picture.id}" class="favorite"
+        = render partial: 'favorites/favorite', picture: @picture, current_user: @current_user.id, favorite: @favorite, favorite_count: @favorite_count, favorite_user: @favorite_user
+      #comment.comment
+        = render partial: 'comments/index', locals: {comments: @comments, picture: @picture}
+      - if logged_in?
+        = render partial: 'comments/form', locals: {comment: @comment, picture: @picture}
+    p.detail = @picture.content
+    p.date #{time_ago_in_words(@picture.created_at)}前

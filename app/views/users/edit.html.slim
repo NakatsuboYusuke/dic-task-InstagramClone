@@ -1,14 +1,24 @@
-.content.new
+.content.edit
   = form_with model: @user, local: true do |form|
+    - if @user.errors.any?
+      .error_content
+        ul
+          - @user.errors.full_messages.each do |message|
+            li = message
     .post_detail.email
+      p = form.label :"メールアドレス"
       = form.email_field :email, placeholder: "携帯電話番号またはメールアドレス"
     .post_detail.full_name
+      p = form.label :"フルネーム"
       = form.text_field :full_name, placeholder: "フルネーム"
     .post_detail.user_name
+      p = form.label :"ユーザーネーム"
       = form.text_field :full_name, placeholder: "ユーザーネーム"
     .post_detail.password
+      p = form.label :"パスワード"
       = form.password_field :password, placeholder: "パスワード"
     .post_detail.password_confirmation
+      p = form.label :"確認用パスワード"
       = form.password_field :password_confirmation, placeholder: "確認用パスワード"
     .post_detail.birthday
       p = form.label :"誕生日"

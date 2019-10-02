@@ -17,6 +17,7 @@ ja:
         image: 写真
       picture:
         content: 本文
+        image: 写真
       comment:
         content: コメント
   date:

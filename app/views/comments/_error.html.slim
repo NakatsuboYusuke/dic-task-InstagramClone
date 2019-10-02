@@ -1,14 +1,7 @@
-- @comments.each do |comment|
-  - if comment.id.present?
-    .info
-      .info_post
-        = link_to user_path(comment.user.id)
-          p.name = link_to comment.user.user_name
-          .info_image
-            p.image = image_tag comment.user.image.url
-    p.detail = comment.content
-- if @comment.errors.any?
-  #error_content.error_content
-    ul
-      - @comment.errors.full_messages.each do |message|
-        li = message
+.post
+  - if @comment.errors.any?
+    #error_content.error_content.error_content_comment
+      ul
+        - @comment.errors.full_messages.each do |message|
+          li = message
+    p.comment_back = link_to "戻る", picture_path(@picture)
