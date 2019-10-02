@@ -1,37 +1,43 @@
 .content.feed
   - if @favorites.present?
-    - @favorites.each do |favorite|
-      .info
-        .info_post
-          = link_to picture_path(favorite.id)
-            p.name = favorite.user.user_name
+    .post
+      - @favorites.each do |favorite|
+        .info
+          .info_wrap
             .info_image
               p.image = image_tag favorite.user.image.url
-      .content
-        button class="js-modal-open" data-target="#{favorite.id}"
-          = image_tag "reader.png"
-      div id="#{favorite.id}" class="modal"
-        div class="modal_bg js-modal-close" data-target="#{favorite.id}"
-          .modal_content
-            .func
-              ul
-                li = link_to "投稿へ移動", picture_path(favorite.id)
-                - if favorite.user_id == current_user.id
-                  li = link_to "投稿を編集", edit_picture_path(favorite.id)
-                  li = link_to "投稿を削除", picture_path(favorite.id), method: :delete
-          #js-black-bg.black-background
-      p.image = image_tag favorite.image.url
-      p.detail = favorite.content
-      .action
-        .favorite
-          p.like_btn
-            span.fa.fa-heart
-            span.like_count
+            .info_post
+              = link_to picture_path(favorite.id)
+                p.name = favorite.user.user_name
+          .modal_btn
+            button class="js-modal-open" data-target="#{favorite.id}"
+              = image_tag "reader.png"
+          div id="#{favorite.id}" class="modal"
+            div class="modal_bg js-modal-close" data-target="#{favorite.id}"
+              .modal_content
+                .modal_func
+                  .modal_func
+                    ul
+                      li = link_to "投稿へ移動", picture_path(favorite.id)
+                      - if favorite.user_id == current_user.id
+                        li = link_to "投稿を編集", edit_picture_path(favorite.id)
+                        li = link_to "投稿を削除", picture_path(favorite.id), method: :delete
+        p.image = image_tag favorite.image.url
+        .action
+          .favorite
+            .like_btn
+              = image_tag "like.png"
+              span.like_count
             - if @favorite_count == 0
               strong 「いいね！」
               span  した人はまだいません
             - else
-              = @favorite_count
+              .total_like
+                strong #{@favorite_count}人
+                span が「いいね！」しました
+        p.detail = favorite.content
+        p.date #{time_ago_in_words(favorite.created_at)}前
   - else
-    p 投稿に誰かが「いいね！」やコメントした場合、ここで確認することができます。
-    p = link_to "写真をシェアしてみよう", pictures_path
+    .no_feed
+      p 投稿に誰かが「いいね！」やコメントした場合、ここで確認することができます。
+      p = link_to "写真をシェアしてみよう", pictures_path

@@ -1,20 +1,23 @@
-- comments.each do |comment|
-  - if comment.id.present?
-    .info
-      .info_post
-        = link_to user_path(comment.user.id)
-          p.name = link_to comment.user.user_name
+.post
+  - comments.each do |comment|
+    - if comment.id.present?
+      .info
+        .info_wrap
           .info_image
-            p.image = image_tag comment.user.image.url
+              p.image = image_tag comment.user.image.url
+          .info_post
+            = link_to user_path(comment.user.id)
+              p.name = comment.user.user_name
+        - if comment.user == current_user
+          = link_to picture_comment_path(comment.picture_id, comment.id), method: :delete, remote: :true, class: "dustbox" do
+             = image_tag  "delete_btn.png"
+          /.modal_btn
+            button class="js-modal-open" data-target="#{comment.id}"
+              = image_tag "reader.png"
+          /div id="#{comment.id}" class="modal"
+            div class="modal_bg js-modal-close" data-target="#{comment.id}"
+              .modal_content
+                .modal_func
+                  ul
+                    li = link_to 'コメントを削除', picture_comment_path(comment.picture_id, comment.id), method: :delete, remote: :true
     p.detail = comment.content
-    - if comment.user == current_user
-      .content
-        button class="js-modal-open" data-target="#{comment.id}"
-          = image_tag "reader.png"
-      div id="#{comment.id}" class="modal"
-        div class="modal_bg js-modal-close" data-target="#{comment.id}"
-          .modal_content
-            .func
-              ul
-                li = link_to 'コメントを削除', picture_comment_path(comment.picture_id, comment.id), method: :delete, remote: :true
-        #js-black-bg.black-background

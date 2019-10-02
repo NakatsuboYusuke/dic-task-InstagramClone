@@ -1,21 +1,19 @@
-.tit
-  h1 InstadrawApp
+.tit.top
+  h2 InstadrawApp
   p InstadrawAppはInstagramのCloneアプリケーションです。
-.content.top
-  .login
-    ul
-      = form_with scope: :session, url: login_path, local: true do |form|
-        li.login
-          dl.login_email
-            dt = form.label :"メールアドレス"
-            dd = form.email_field :email
-        li.login
-          dl.login_password
-            dt = form.label :"パスワード"
-            dd = form.password_field :password
-        li
-          .btn
-            = form.submit "ログイン", class: "submit_btn"
+.content.top.login
+  = form_with scope: :session, url: login_path, local: true do |form|
+    .post_detail.email
+      dl
+        dt = form.label :"メールアドレス"
+        dd = form.email_field :email
+    .post_detail.password
+      dl
+        dt = form.label :"パスワード"
+        dd = form.password_field :password
+    .btn
+      = form.submit "ログイン", class: "submit_btn"
+.enter
   h3 新規アカウントを作成
   p 友達の写真や動画をチェックしよう
-  = link_to "アカウント登録", new_user_path
+  = link_to "アカウント登録", new_user_path, class: "account_btn"

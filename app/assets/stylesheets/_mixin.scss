@@ -1,0 +1,70 @@
+/*////////////////////
+  mixin
+////////////////////*/
+
+$light-red: #d7000f;
+$dark-red: #990000;
+$base-yellow: #fdd001;
+$light-black: #010101;
+$light-gray: #ccd1d4;
+$light-white: #f7f6f5;
+
+@mixin submit {
+  display: inline-flex;
+  padding: 1rem 3rem;
+  background: $dark-red;
+  box-shadow: 0 0 .4rem rgba(0,0,0,0.1);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  &:hover {
+    background: $light-red;
+    transition: all 0.5s ease;
+  }
+}
+
+@mixin link {
+  display: inline-flex;
+  font-size: 1.4rem;
+  color: $dark-red;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.5s ease;
+    color: $light-red;
+  }
+}
+
+@mixin enter {
+  display: inline-flex;
+  padding-left: 1rem;
+  font-weight: 600;
+  color: $light-red;
+}
+
+/* media query //////////*/
+//$pc: 960px;
+$tab: 768px;
+//$sp: 559px;
+
+/*
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
+*/
+
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+
+/*
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+*/

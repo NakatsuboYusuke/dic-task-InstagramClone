@@ -11,24 +11,43 @@ html
     #container
       header.header
         .inner
-          .picture
-            = link_to new_picture_path do
-              = image_tag "camera.png"
-          .logo
-            h1 = link_to root_path do
-                = image_tag "logo.png"
-                span InstadrawApp
-          #wrapper
+          .wrapper
+            - if logged_in?
+              .picture
+                = link_to new_picture_path do
+                  = image_tag "camera.png"
+            .logo
+              h1
+                - if logged_in?
+                  = link_to pictures_path do
+                    = image_tag "logo.png"
+                    span InstadrawApp
+                - else
+                  = link_to root_path do
+                    = image_tag "logo.png"
+                    span InstadrawApp
+          #wrapper.wrapper
             nav.nav.login
               ul
                 - if logged_in?
                   li.subnav アカウント
-                  li = link_to "プロフィールを編集", user_path(current_user.id)
-                  li = link_to "ログアウト", logout_path(current_user.id), method: :delete
+                  li = link_to user_path(current_user.id)
+                    = image_tag "profile.png", class: "pc"
+                    span.sp プロフィール
+                  li = link_to feed_user_path(current_user.id)
+                    = image_tag "like.png", class: "pc"
+                    span.sp アクティビティ
+                  li = link_to logout_path(current_user.id), method: :delete do
+                    = image_tag "unlock.png", class: "pc"
+                    span.sp ログアウト
                 - else
                   li.subnav オプション
-                  li = link_to "登録", new_user_path
-                  li = link_to "ログイン", login_path
+                  li = link_to new_user_path do
+                    = image_tag "account.png", class: "pc"
+                    span.sp アカウント登録
+                  li = link_to login_path do
+                    = image_tag "lock.png", class: "pc"
+                    span.sp ログイン
             button#nav-btn.hamburger
               span.bdr
               span.bdr
