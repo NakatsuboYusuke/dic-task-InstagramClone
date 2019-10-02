@@ -7,6 +7,8 @@
         p.name = @user.user_name
         - if @user.id == current_user.id
           = link_to "プロフィールを編集", edit_user_path(@user.id)
+        - else
+          = link_to "投稿のアクティビティ", feed_user_path(@user.id)
     dl
       dt 名前
       dd = @user.full_name

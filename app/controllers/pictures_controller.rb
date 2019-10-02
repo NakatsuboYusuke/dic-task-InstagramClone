@@ -2,9 +2,10 @@ class PicturesController < ApplicationController
 
   before_action :set_pictures, only: [:show, :edit, :update, :destroy]
   before_action :set_favorite, only: [:show]
+  before_action :current_user?, only: [:edit, :update, :destroy]
 
   # skip_before_action
-  #skip_before_action :login_forbided
+  skip_before_action :login_forbided
 
   def index
     @pictures = Picture.all.order(created_at: :desc)
@@ -75,6 +76,11 @@ class PicturesController < ApplicationController
 
   def set_favorite
     @favorite_count = Favorite.where(picture_id: @picture.id).count
+  end
+
+  def current_user?
+    @picture = Picture.find(params[:id])
+    redirect_to pictures_path unless @picture.user_id == current_user.id
   end
 
   # instance method for association

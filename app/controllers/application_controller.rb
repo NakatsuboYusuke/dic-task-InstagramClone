@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
 
   # helper method
-  helper_method :current_user, :logged_in?, :current_user?, :authenticate_user, :convert_birthday_time, :favorite?, :render_404, :render_405
-  #before_action :login_required
-  #before_action :login_forbided
+  helper_method :current_user, :logged_in?, :login_required, :login_forbided, :convert_birthday_time, :favorite?, :render_404, :render_405
+  before_action :login_required
+  before_action :login_forbided
 
   # security token
   protect_from_forgery with: :exception

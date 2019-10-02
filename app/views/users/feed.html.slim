@@ -7,7 +7,7 @@
             .info_image
               p.image = image_tag favorite.user.image.url
             .info_post
-              = link_to picture_path(favorite.id)
+              = link_to user_path(favorite.user.id)
                 p.name = favorite.user.user_name
           .modal_btn
             button class="js-modal-open" data-target="#{favorite.id}"

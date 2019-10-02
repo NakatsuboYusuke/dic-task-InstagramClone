@@ -53,12 +53,12 @@ html
               span.bdr
               span.bdr
             #contents
-      section.sec
-        .inner
-          = yield
       - if flash[:notice]
         .flash
           = flash[:notice]
+      section.sec
+        .inner
+          = yield
       footer.footer
         .inner
           p

@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
 
-  before_action :user_params, only: [:create]
+  before_action :user_params, only: [:create, :update, :destroy]
   before_action :set_users, only: [:show, :edit, :update, :feed]
+  before_action :current_user?, only: [:edit, :update, :destroy]
   before_action :set_favorite, only: [:feed]
 
   # skip_before_action
-  #skip_before_action :login_required
-  #skip_before_action :login_forbided, only: [:edit]
+  skip_before_action :login_required
+  skip_before_action :login_forbided, only: [:show, :feed, :edit]
 
   def show
     @pictures = @user.pictures
@@ -55,6 +56,11 @@ class UsersController < ApplicationController
 
   def set_favorite
     @favorite_count = Favorite.where(user_id: @user.id).count
+  end
+
+  def current_user?
+    @user = User.find(params[:id])
+    redirect_to user_path(@user.id) unless @user.id == current_user.id
   end
 
 end

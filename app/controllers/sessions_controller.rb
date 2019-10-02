@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
 
   # skip_before_action
-  #skip_before_action :login_required
-  #skip_before_action :login_forbided
+  skip_before_action :login_required
+  skip_before_action :login_forbided
 
   def new
   end
