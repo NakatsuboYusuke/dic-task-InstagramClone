@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   # skip_before_action
   #skip_before_action :login_required
-  #skip_before_action :login_forbided, only: [:show, :edit, :update]
+  #skip_before_action :login_forbided, only: [:edit]
 
   def show
     @pictures = @user.pictures
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def feed
-    @favorites = current_user.favorite_pictures
+    @favorites = current_user.favorite_pictures.order(created_at: :desc)
   end
 
   private

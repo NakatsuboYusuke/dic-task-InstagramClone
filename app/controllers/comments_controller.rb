@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
 
+  # skip_before_action
+  #skip_before_action :login_forbided
+  
   def create
     @picture = Picture.find(params[:picture_id])
     @comment = @picture.comments.build(comment_params)
