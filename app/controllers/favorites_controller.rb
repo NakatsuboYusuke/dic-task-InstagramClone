@@ -1,7 +1,7 @@
 class FavoritesController < ApplicationController
 
   # skip_before_action
-  #skip_before_action :login_forbided
+  skip_before_action :login_forbided
 
   def create
     @favorite = current_user.favorites.new(picture_id: params[:picture_id])
