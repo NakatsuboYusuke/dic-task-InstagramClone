@@ -542,6 +542,14 @@ footer {
       margin-bottom: 0;
     }
   }
+  .no_post {
+    text-align: left;
+    strong {
+      display: inline-flex;
+      padding: 0 .5rem;
+      font-size: 1.6rem;
+    }
+  }
 }
 
 /*////////////////////////////////////////

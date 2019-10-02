@@ -28,7 +28,8 @@
             .like_btn
               = image_tag "like.png"
               span.like_count
-            - if @favorite_count == 0
+            - @favorite_count = Favorite.where(picture_id: favorite.id).count
+            - if @favorite == 0
               strong 「いいね！」
               span  した人はまだいません
             - else

@@ -6,7 +6,7 @@
           .info_image
             p.image = image_tag picture.user.image.url
           .info_post
-            = link_to picture_path(picture.id)
+            = link_to user_path(picture.user.id)
               p.name = picture.user.user_name
         .modal_btn
           button class="js-modal-open" data-target="#{picture.id}"
