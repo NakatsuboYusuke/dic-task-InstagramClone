@@ -5,7 +5,7 @@ class PicturesController < ApplicationController
   before_action :current_user?, only: [:edit, :update, :destroy]
 
   # skip_before_action
-  skip_before_action :login_required
+  #skip_before_action :login_required
   skip_before_action :login_forbided
 
   def index
