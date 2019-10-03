@@ -135,6 +135,10 @@
       ul {
         text-align: center;
         li {
+          border-bottom: 1px solid $light-gray;
+          &:last-of-type {
+            border-bottom: none;
+          }
           a {
             display: flex;
             justify-content: center;
@@ -142,7 +146,6 @@
             width: 100%;
             height: auto;
             padding: 2rem;
-            border-bottom: 1px solid $light-gray;
             color: $dark-red;
             cursor: pointer;
             &:hover {
