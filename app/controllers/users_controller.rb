@@ -6,8 +6,8 @@ class UsersController < ApplicationController
   before_action :set_favorite, only: [:feed]
 
   # skip_before_action
-  skip_before_action :login_required
-  skip_before_action :login_forbided, only: [:show, :edit, :create, :update, :destroy, :feed]
+  skip_before_action :login_required, only: [:new]
+  skip_before_action :login_forbided, only: [:show, :feed]
 
   def show
     @pictures = @user.pictures
