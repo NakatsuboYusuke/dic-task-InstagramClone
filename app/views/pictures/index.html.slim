@@ -1,44 +1,49 @@
 .content.list
-  .post
-    - @pictures.each do |picture|
-      .info
-        .info_wrap
-          .info_image
-            p.image = image_tag picture.user.image.url
-          .info_post
-            = link_to user_path(picture.user.id)
-              p.name = picture.user.user_name
-        .modal_btn
-          button class="js-modal-open" data-target="#{picture.id}"
-            = image_tag "reader.png"
-        div id="#{picture.id}" class="modal"
-          div class="modal_bg js-modal-close" data-target="#{picture.id}"
-          .modal_content
-            .modal_func
-              ul
-                li = link_to "投稿へ移動", picture_path(picture.id)
-                - if picture.user_id == current_user.id
-                  li = link_to "投稿を編集", edit_picture_path(picture.id)
-                  li = link_to "投稿を削除", picture_path(picture.id), method: :delete
-      p.image = image_tag picture.image.url
-      .action
-        - @picture = picture.id
-        - @favorite_count = picture.favorites.where(picture_id: picture).count
-        div id="favorite_#{@picture}" class="favorite"
-          - if favorite?(picture, current_user)
-            .like_btn.delete
-              = link_to favorite_path(id: picture.id), method: :delete, remote: :true, class: "like" do
-                = image_tag "like.png"
-          - else
-            .dislike_btn.create
-              = link_to favorites_path(picture_id: picture.id), method: :post, remote: :true, class: "dislike" do
-                = image_tag "unlike.png"
-          - if @favorite_count == 0
-            strong 「いいね！」
-            span した人はまだいません
-          - else
-            .total_like
-              strong #{@favorite_count}人
-              span が「いいね！」しました
-      p.detail = picture.content
-      p.date #{time_ago_in_words(picture.created_at)}前
+  - if @pictures.present?
+    .post
+      - @pictures.each do |picture|
+        .info
+          .info_wrap
+            .info_image
+              p.image = image_tag picture.user.image.url
+            .info_post
+              = link_to user_path(picture.user.id)
+                p.name = picture.user.user_name
+          .modal_btn
+            button class="js-modal-open" data-target="#{picture.id}"
+              = image_tag "reader.png"
+          div id="#{picture.id}" class="modal"
+            div class="modal_bg js-modal-close" data-target="#{picture.id}"
+            .modal_content
+              .modal_func
+                ul
+                  li = link_to "投稿へ移動", picture_path(picture.id)
+                  - if picture.user_id == current_user.id
+                    li = link_to "投稿を編集", edit_picture_path(picture.id)
+                    li = link_to "投稿を削除", picture_path(picture.id), method: :delete
+        p.image = image_tag picture.image.url
+        .action
+          - @picture = picture.id
+          - @favorite_count = picture.favorites.where(picture_id: picture).count
+          div id="favorite_#{@picture}" class="favorite"
+            - if favorite?(picture, current_user)
+              .like_btn.delete
+                = link_to favorite_path(id: picture.id), method: :delete, remote: :true, class: "like" do
+                  = image_tag "like.png"
+            - else
+              .dislike_btn.create
+                = link_to favorites_path(picture_id: picture.id), method: :post, remote: :true, class: "dislike" do
+                  = image_tag "unlike.png"
+            - if @favorite_count == 0
+              strong 「いいね！」
+              span した人はまだいません
+            - else
+              .total_like
+                strong #{@favorite_count}人
+                span が「いいね！」しました
+        p.detail = picture.content
+        p.date #{time_ago_in_words(picture.created_at)}前
+  - else
+    .no_feed
+      p 誰かが投稿した場合、ここで確認することができます。
+      p = link_to "写真を投稿してみよう", new_picture_path
