@@ -1,12 +1,26 @@
 class ApplicationController < ActionController::Base
 
   # helper method
-  helper_method :current_user, :logged_in?, :login_required, :login_forbided, :convert_birthday_time, :favorite?, :render_404, :render_405
+  helper_method :current_user, :logged_in?, :login_required, :login_forbided, :convert_birthday_time, :favorite?
   before_action :login_required
   before_action :login_forbided
 
   # security token
   protect_from_forgery with: :exception
+
+  # 404 or 500
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from ActionController::RoutingError, with: :render_404
+  # if 404 is not catched
+  rescue_from Exception, with: :render_500
+
+  def render_404
+    render template: 'errors/404', status: 404, layout: 'application', content_type: 'text/html'
+  end
+
+  def render_500
+    render template: 'errors/500', status: 500, layout: 'application', content_type: 'text/html'
+  end
 
   private
 
@@ -38,19 +52,5 @@ class ApplicationController < ActionController::Base
   def favorite?(picture, user)
     picture.favorites.find_by(user_id: user.id)
   end
-
-  # 404 or 500
-  #rescue_from ActiveRecord::RecordNotFound, with: :render_404
-  #rescue_from ActionController::RoutingError, with: :render_404
-  # if 404 is not catched
-  #rescue_from Exception, with: :render_500
-
-  #def render_404
-    #render template: 'errors/404', status: 404, layout: 'application', content_type: 'text/html'
-  #end
-
-  #def render_500
-    #render template: 'errors/500', status: 500, layout: 'application', content_type: 'text/html'
-  #end
 
 end

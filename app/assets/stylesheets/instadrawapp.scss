@@ -9,12 +9,7 @@
   - footer
   - form
   - section
-   - top
-   - login_error
-   - bottom
   - parts
-   - hamburger
-   - modal
 ////////////////////////////////////////*/
 
 /*////////////////////////////////////////
@@ -35,7 +30,7 @@
   justify-content: center;
   align-items: unset;
   .inner {
-    max-width: 960rem;
+    max-width: 64rem;
     width: 100%;
     height: auto;
   }
@@ -43,7 +38,7 @@
 
 .sec {
   .inner {
-    max-width: 96rem;
+    max-width: 64rem;
     width: 100%;
     height: auto;
     padding: 2rem;
@@ -62,32 +57,15 @@
     .content {
       padding: 2rem;
       p {
-        //margin-bottom: .5rem;
         font-size: 1.4rem;
         &.detail {
           margin-bottom: 2rem;
           text-align: left;
         }
-        //&.image {
-          //margin-bottom: 2rem;
-        //}
       }
     }
   }
 }
-
-/* form ////////////////////*/
-/*
-.sec {
-  .inner {
-    .content.login,.content.new {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-}
-*/
 
 /* flash //////////*/
 .flash {
@@ -686,7 +664,6 @@ footer {
     }
   }
 }
-
 
 /* 404, 500 ////////////////////*/
 .sec {
