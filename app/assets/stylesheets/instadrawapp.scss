@@ -670,6 +670,23 @@ footer {
   }
 }
 
+.sec {
+  .inner {
+    .list {
+      .no_feed {
+        p {
+          &:first-of-type {
+            margin-bottom: 1rem;
+          }
+          a {
+            @include link;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 /* 404, 500 ////////////////////*/
 .sec {
