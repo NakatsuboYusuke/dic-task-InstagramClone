@@ -7,10 +7,10 @@ class UsersController < ApplicationController
 
   # skip_before_action
   skip_before_action :login_required, only: [:new]
-  skip_before_action :login_forbided, only: [:show, :feed]
+  skip_before_action :login_forbided, only: [:show, :edit, :create, :update, :destroy, :feed]
 
   def show
-    @pictures = @user.pictures
+    @pictures = @user.pictures.order(created_at: :desc)
   end
 
   def new
