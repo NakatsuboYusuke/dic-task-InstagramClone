@@ -4,7 +4,7 @@ class ConfirmMailer < ApplicationMailer
     @picture = picture
     mail(
       subject: '投稿完了メール',
-      to: 'nakatsubo.works@gmail.com',
+      to: @picture.user.email,
       from: 'InstadrawApp'
     )
   end
