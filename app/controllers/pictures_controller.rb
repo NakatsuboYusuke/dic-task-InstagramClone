@@ -2,7 +2,7 @@ class PicturesController < ApplicationController
 
   before_action :set_pictures, only: [:show, :edit, :update, :destroy]
   before_action :set_favorite, only: [:show]
-  before_action :current_user?, only: [:edit, :update, :destroy]
+  before_action :current_user?, only: [:edit]
 
   # skip_before_action
   skip_before_action :login_forbided
@@ -80,7 +80,7 @@ class PicturesController < ApplicationController
 
   def current_user?
     @picture = Picture.find(params[:id])
-    redirect_to pictures_path unless @picture.user_id == current_user.id
+    redirect_to picture_path(@picture.id) unless @picture.user_id == current_user.id
   end
 
   # instance method for association

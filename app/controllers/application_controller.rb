@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   # helper method
-  helper_method :current_user, :logged_in?, :login_required, :login_forbided, :convert_birthday_time, :favorite?
+  helper_method :current_user, :logged_in?, :convert_birthday_time, :favorite?
   before_action :login_required
   before_action :login_forbided
 

@@ -1,13 +1,17 @@
 class UsersController < ApplicationController
 
-  before_action :user_params, only: [:create, :update, :destroy]
+  before_action :user_params, only: [:create, :update]
   before_action :set_users, only: [:show, :edit, :update, :feed]
-  before_action :current_user?, only: [:edit, :update, :destroy]
+  before_action :current_user?, only: [:edit]
   before_action :set_favorite, only: [:feed]
 
   # skip_before_action
   skip_before_action :login_required, only: [:new, :create]
-  skip_before_action :login_forbided, only: [:show, :edit, :create, :update, :destroy, :feed]
+  skip_before_action :login_forbided, only: [:index, :show, :edit, :create, :update, :feed] # => else :new
+
+  def index
+    redirect_to user_path(current_user.id)
+  end
 
   def show
     @pictures = @user.pictures.order(created_at: :desc)

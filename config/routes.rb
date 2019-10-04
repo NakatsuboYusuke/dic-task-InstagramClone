@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # pictures
   resources :pictures do
-    resources :comments
+    resources :comments, only: [:create, :destroy]
     collection do
       post :confirm
     end
